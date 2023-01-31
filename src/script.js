@@ -44,6 +44,9 @@ bakedTexture.flipY = false;
 
 // Portal Light
 const portalLightMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    uTime: { value: 0 },
+  },
   vertexShader: portalVertexShader,
   fragmentShader: portalFragmentShader,
 });
@@ -190,6 +193,7 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   firefliesMaterial.uniforms.uTime.value = elapsedTime;
+  portalLightMaterial.uniforms.uTime.value = elapsedTime;
 
   // Update controls
   controls.update();

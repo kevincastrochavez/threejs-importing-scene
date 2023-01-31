@@ -32,10 +32,12 @@ dracoLoader.setDecoderPath('draco/');
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
-const bakedMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const bakedTexture = textureLoader.load('baked.jpg');
+const bakedMaterial = new THREE.MeshBasicMaterial({ map: bakedTexture });
+bakedTexture.flipY = false;
 
 // L O A D E R
-gltfLoader.load('portal2.glb', (gltf) => {
+gltfLoader.load('portal.glb', (gltf) => {
   gltf.scene.traverse((child) => {
     child.material = bakedMaterial;
   });

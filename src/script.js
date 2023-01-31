@@ -47,7 +47,6 @@ const poleLightMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 // L O A D E R
 gltfLoader.load('portal.glb', (gltf) => {
   const bakedMesh = gltf.scene.children.find((child) => child.name === 'baked');
-  console.log(bakedMesh);
 
   const poleLightAMesh = gltf.scene.children.find(
     (child) => child.name === 'poleLightA'
@@ -68,6 +67,32 @@ gltfLoader.load('portal.glb', (gltf) => {
 
   scene.add(gltf.scene);
 });
+
+// Fireflies
+const firefliesGeometry = new THREE.BufferGeometry();
+const firefliesCount = 30;
+const firefliesPositionArray = new Float32Array(firefliesCount * 3);
+
+for (let index = 0; index < firefliesCount; index++) {
+  firefliesPositionArray[index * 3] = (Math.random() - 0.5) * 4;
+  firefliesPositionArray[index * 3 + 1] = Math.random() * 1.5;
+  firefliesPositionArray[index * 3 + 2] = (Math.random() - 0.5) * 4;
+}
+
+firefliesGeometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(firefliesPositionArray, 3)
+);
+
+// Material
+const firefliesMaterial = new THREE.PointsMaterial({
+  size: 0.1,
+  sizeAttenuation: true,
+});
+
+// Points
+const fireflies = new THREE.Points(firefliesGeometry, firefliesMaterial);
+scene.add(fireflies);
 
 /**
  * Sizes

@@ -5,6 +5,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import firefliesVertexShader from './shaders/fireflies/vertex.glsl';
 import firefliesFragmentShader from './shaders/fireflies/fragment.glsl';
+import portalVertexShader from './shaders/portal/vertex.glsl';
+import portalFragmentShader from './shaders/portal/fragment.glsl';
 
 /**
  * Base
@@ -41,7 +43,10 @@ const bakedMaterial = new THREE.MeshBasicMaterial({ map: bakedTexture });
 bakedTexture.flipY = false;
 
 // Portal Light
-const portalLightMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const portalLightMaterial = new THREE.ShaderMaterial({
+  vertexShader: portalVertexShader,
+  fragmentShader: portalFragmentShader,
+});
 
 // Pole Light
 const poleLightMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });

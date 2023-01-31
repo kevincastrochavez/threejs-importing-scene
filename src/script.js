@@ -32,18 +32,13 @@ dracoLoader.setDecoderPath('draco/');
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
-/**
- * Object
- */
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial()
-);
-
-scene.add(cube);
+const bakedMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
 // L O A D E R
 gltfLoader.load('portal2.glb', (gltf) => {
+  gltf.scene.traverse((child) => {
+    child.material = bakedMaterial;
+  });
   scene.add(gltf.scene);
 });
 

@@ -6,9 +6,6 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import firefliesVertexShader from './shaders/fireflies/vertex.glsl';
 import firefliesFragmentShader from './shaders/fireflies/fragment.glsl';
 
-console.log(firefliesFragmentShader);
-console.log(firefliesVertexShader);
-
 /**
  * Base
  */
@@ -90,9 +87,9 @@ firefliesGeometry.setAttribute(
 );
 
 // Material
-const firefliesMaterial = new THREE.PointsMaterial({
-  size: 0.1,
-  sizeAttenuation: true,
+const firefliesMaterial = new THREE.ShaderMaterial({
+  vertexShader: firefliesVertexShader,
+  fragmentShader: firefliesFragmentShader,
 });
 
 // Points

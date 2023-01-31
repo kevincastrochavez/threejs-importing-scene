@@ -96,6 +96,7 @@ firefliesGeometry.setAttribute(
 // Material
 const firefliesMaterial = new THREE.ShaderMaterial({
   uniforms: {
+    uTime: { value: 0 },
     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
     uSize: { value: 100 },
   },
@@ -182,6 +183,8 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  firefliesMaterial.uniforms.uTime.value = elapsedTime;
 
   // Update controls
   controls.update();

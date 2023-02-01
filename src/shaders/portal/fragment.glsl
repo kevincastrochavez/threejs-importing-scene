@@ -1,4 +1,7 @@
 uniform float uTime;
+uniform vec3 uColorStart;
+uniform vec3 uColorEnd;
+
 varying vec2 vUv;
 
 //	Classic Perlin 3D Noise 
@@ -89,5 +92,9 @@ void main()
 
     strength += + step(-0.2, strength);
 
-    gl_FragColor = vec4(strength, strength, strength, 1.0);
+    strength = clamp(strength, 0.0, 1.0);
+
+    vec3 color = mix(uColorStart, uColorEnd, strength);
+
+    gl_FragColor = vec4(color, 1.0);
 }

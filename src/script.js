@@ -15,8 +15,9 @@ import portalFragmentShader from './shaders/portal/fragment.glsl';
 const debugObject = {};
 
 const gui = new dat.GUI({
-  width: 400,
+  width: 300,
 });
+gui.close();
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
@@ -175,7 +176,19 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.x = 4;
 camera.position.y = 2;
-camera.position.z = 4;
+
+if (window.innerWidth <= 400) {
+  camera.position.z = 9;
+}
+
+if (window.innerWidth <= 800) {
+  camera.position.z = 6;
+}
+
+if (window.innerWidth > 800) {
+  camera.position.z = 5;
+}
+
 scene.add(camera);
 
 // Controls
